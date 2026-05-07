@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Addus Kitchen | Traditional Pakistani Cuisine</title>
+  <meta name="description" content="Addus Kitchen — a stylish Pakistani restaurant website featuring traditional food, aesthetic design, and prices in PKR." />
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --card: rgba(255, 248, 235, 0.08);
+      --card-strong: rgba(255, 248, 235, 0.14);
+      --text: #f9f2e7;
+      --muted: #d9c8b0;
+      --gold: #d5a54e;
+      --gold-soft: #f1d29a;
+      --green: #0f4f3b;
+      --green-soft: #1b6d53;
+      --rose: #8c2f39;
+      --border: rgba(241, 210, 154, 0.18);
+      --shadow: 0 20px 50px rgba(0,0,0,0.32);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(213,165,78,0.12), transparent 35%),
+        radial-gradient(circle at top right, rgba(27,109,83,0.18), transparent 30%),
+        linear-gradient(135deg, #120e0c 0%, #1b1410 48%, #0d1112 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(212, 104, 61, 0.07), transparent 28%),
+        radial-gradient(circle at 80% 30%, rgba(213,165,78,0.08), transparent 26%),
+        radial-gradient(circle at 50% 80%, rgba(27,109,83,0.10), transparent 22%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(213,165,78,0.12);
+      border: 1px solid rgba(241,210,154,0.18);
+      color: var(--gold-soft);
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(10, 10, 10, 0.44);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, var(--gold), #7d491e);
+      display: grid;
+      place-items: center;
+      color: #1b1208;
+      font-size: 1.25rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.08rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--gold-soft); }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--gold), #b96f2f);
+      color: #1b1208;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 16px 30px rgba(185,111,47,0.22);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 34px rgba(185,111,47,0.28);
+    }
+
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .ghost-btn:hover {
+      border-color: rgba(241,210,154,0.35);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 72px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-copy h1 span {
+      display: block;
+      color: var(--gold-soft);
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.8;
+      max-width: 650px;
+      margin: 0 0 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: var(--gold-soft);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 580px;
+      display: grid;
+      align-items: center;
+    }
+
+    .plate {
+      position: relative;
+      width: min(100%, 540px);
+      margin-left: auto;
+      aspect-ratio: 1 / 1;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,221,170,0.16), transparent 40%),
+        linear-gradient(160deg, rgba(27,109,83,0.85), rgba(140,47,57,0.55), rgba(35,17,10,0.95));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 35px 80px rgba(0,0,0,0.38);
+      overflow: hidden;
+    }
+
+    .plate::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 26px;
+      border: 1px solid rgba(241,210,154,0.24);
+      background:
+        radial-gradient(circle at 40% 35%, rgba(255, 230, 188, 0.95), rgba(237, 157, 72, 0.88) 24%, rgba(135, 62, 25, 0.88) 44%, rgba(36, 19, 10, 0.96) 65%),
+        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%);
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.22);
+    }
+
+    .dish {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(0.2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+    }
+
+    .dish.one {
+      width: 112px; height: 112px;
+      background: radial-gradient(circle at 40% 40%, #ffe7ab, #dd8d3b 58%, #93461b 76%);
+      top: 130px; left: 90px;
+    }
+
+    .dish.two {
+      width: 88px; height: 88px;
+      background: radial-gradient(circle at 35% 35%, #f8ffca, #7b9c33 58%, #48581d 82%);
+      right: 92px; top: 156px;
+    }
+
+    .dish.three {
+      width: 130px; height: 130px;
+      background: radial-gradient(circle at 45% 35%, #ffd8ae, #bd6122 58%, #7e3114 80%);
+      left: 205px; bottom: 116px;
+    }
+
+    .steam {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 65%);
+      filter: blur(10px);
+      animation: floatUp 4.8s ease-in-out infinite;
+    }
+
+    .steam.s1 { top: 45px; left: 180px; }
+    .steam.s2 { top: 18px; right: 120px; animation-delay: 1s; }
+
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.55; }
+      50% { transform: translateY(-18px) scale(1.08); opacity: 0.22; }
+    }
+
+    .floating-card {
+      position: absolute;
+      background: rgba(12, 12, 12, 0.72);
+      border: 1px solid rgba(241,210,154,0.15);
+      border-radius: 18px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      max-width: 210px;
+    }
+
+    .floating-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--gold-soft);
+      font-size: 1rem;
+    }
+
+    .floating-card span {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    .card-a { left: 0; bottom: 110px; }
+    .card-b { right: 0; top: 86px; }
+
+    section {
+      padding: 38px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 12px 0 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .feature-card,
+    .menu-card,
+    .story-card,
+    .contact-card,
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(241,210,154,0.08), transparent 45%);
+      pointer-events: none;
+    }
+
+    .icon-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(213,165,78,0.18), rgba(140,47,57,0.18));
+      border: 1px solid rgba(241,210,154,0.15);
+      display: grid;
+      place-items: center;
+      color: var(--gold-soft);
+      font-size: 1.2rem;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3,
+    .story-card h3,
+    .contact-card h3,
+    .review-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+    }
+
+    .feature-card p,
+    .story-card p,
+    .contact-card p,
+    .review-card p,
+    .menu-card p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .story-card.highlight {
+      background: linear-gradient(145deg, rgba(27,109,83,0.34), rgba(140,47,57,0.20));
+    }
+
+    .mini-list {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-list li {
+      padding: 12px 14px;
+      border: 1px solid rgba(241,210,154,0.12);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .menu-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 22px;
+    }
+
+    .menu-card h3 {
+      margin: 0 0 16px;
+      font-size: 1.24rem;
+      color: var(--gold-soft);
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px 18px;
+      padding: 16px 0;
+      border-bottom: 1px dashed rgba(241,210,154,0.14);
+    }
+
+    .menu-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .menu-item strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+    }
+
+    .menu-item span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .price {
+      color: var(--gold-soft);
+      font-weight: 800;
+      white-space: nowrap;
+      font-size: 1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 20px;
+    }
+
+    .gallery-card {
+      min-height: 260px;
+      border-radius: 26px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(241,210,154,0.14);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(160deg, rgba(27,109,83,0.35), rgba(140,47,57,0.18)),
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,0.16), transparent 30%),
+        radial-gradient(circle at 70% 30%, rgba(255,199,126,0.22), transparent 28%),
+        linear-gradient(135deg, #1f140d, #51311e, #173129);
+    }
+
+    .gallery-card::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+    }
+
+    .gallery-card .label {
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      right: 22px;
+      background: rgba(12,12,12,0.56);
+      border: 1px solid rgba(241,210,154,0.12);
+      border-radius: 16px;
+      padding: 14px 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .gallery-card .label strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--gold-soft);
+    }
+
+    .gallery-card .label span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .review-card strong {
+      display: block;
+      margin-top: 14px;
+      color: var(--gold-soft);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+    }
+
+    .contact-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-card li {
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(241,210,154,0.12);
+      background: rgba(255,255,255,0.03);
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid rgba(241,210,154,0.14);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 15px 16px;
+      font: inherit;
+      outline: none;
+    }
+
+    input::placeholder, textarea::placeholder { color: #b8a994; }
+    textarea { min-height: 140px; resize: vertical; }
+
+    .footer {
+      padding: 26px 0 50px;
+      color: var(--muted);
+    }
+
+    .footer-box {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(241,210,154,0.12);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .story-layout,
+      .menu-wrap,
+      .gallery,
+      .testimonials,
+      .contact-layout,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 420px;
+      }
+
+      .plate {
+        margin: 0 auto;
+      }
+
+      .card-a, .card-b {
+        position: static;
+        margin-top: 16px;
+        max-width: none;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 840px) {
+      .menu-toggle { display: inline-flex; }
+
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        left: 16px;
+        right: 16px;
+        padding: 18px;
+        border-radius: 22px;
+        background: rgba(12,12,12,0.92);
+        border: 1px solid rgba(255,255,255,0.08);
+        flex-direction: column;
+        align-items: flex-start;
+        display: none;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav .cta.desktop-only { display: none; }
+      .stats,
+      .field-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <div class="brand-mark">AK</div>
+        <div>
+          <small>Pakistani Tradition</small>
+          <strong>Addus Kitchen</strong>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#ambience">Ambience</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:12px;">
+        <a href="#contact" class="cta desktop-only">Reserve a Table</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="pill">خوش آمدید • Aesthetic Pakistani Dining</div>
+          <h1>Traditional Taste,<span>Royal Pakistani Vibes.</span></h1>
+          <p>
+            Welcome to <strong>Addus Kitchen</strong> — a warm and elegant restaurant experience inspired by Pakistani hospitality,
+            rich spices, family recipes, and beautifully presented traditional food. This website is designed with an aesthetic,
+            modern Pakistani theme and menu pricing in PKR.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#menu" class="cta">Explore Menu</a>
+            <a href="#about" class="ghost-btn">Our Story</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>100% Halal</strong>
+              <span>Traditional Pakistani recipes with authentic flavors.</span>
+            </div>
+            <div class="stat">
+              <strong>PKR Pricing</strong>
+              <span>Local-friendly pricing clearly displayed across menu.</span>
+            </div>
+            <div class="stat">
+              <strong>Fresh Daily</strong>
+              <span>Slow-cooked gravies, grilled specialties, and hand-made bread.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="plate">
+            <div class="steam s1"></div>
+            <div class="steam s2"></div>
+            <div class="dish one"></div>
+            <div class="dish two"></div>
+            <div class="dish three"></div>
+          </div>
+          <div class="floating-card card-a">
+            <strong>Signature Special</strong>
+            <span>Chicken Karahi with naan, smoky finish, and bold desi masala.</span>
+          </div>
+          <div class="floating-card card-b">
+            <strong>House Style</strong>
+            <span>Inspired by truck art colors, Mughal warmth, and premium dining elegance.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="pill">About Addus Kitchen</div>
+            <h2>Where family recipes meet modern presentation.</h2>
+          </div>
+          <p>
+            Addus Kitchen blends classic Pakistani comfort food with a stylish visual identity. The color palette uses deep green,
+            maroon, gold, and warm earthy tones to reflect heritage, celebration, and hospitality.
+          </p>
+        </div>
+
+        <div class="story-layout">
+          <div class="story-card highlight">
+            <h3>Our Experience</h3>
+            <p>
+              From aromatic biryani and sizzling karahi to creamy handi and freshly baked naan, every dish is designed to feel festive,
+              authentic, and memorable.
+            </p>
+            <ul class="mini-list">
+              <li>Authentic Pakistani traditional food</li>
+              <li>Aesthetic dine-in style with premium look</li>
+              <li>Perfect for family dinners and special evenings</li>
+            </ul>
+          </div>
+
+          <div class="story-card">
+            <h3>Brand Direction</h3>
+            <p>
+              This website concept focuses on a luxurious yet welcoming restaurant identity. It is mobile-friendly, visually modern,
+              and easy to customize with your real address, phone number, and social media details later.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Traditional</span>
+              <span class="tag">Elegant</span>
+              <span class="tag">Pakistani Theme</span>
+              <span class="tag">Responsive Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="pill">Why Guests Love It</div>
+            <h2>A refined desi dining identity.</h2>
+          </div>
+          <p>
+            Every section is designed to help your restaurant look premium online while keeping the soul of Pakistani food at the center.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="feature-card">
+            <div class="icon-badge">🍲</div>
+            <h3>Traditional Menu</h3>
+            <p>Featuring beloved Pakistani classics such as biryani, karahi, handi, kebab platters, and rich desserts.</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon-badge">✨</div>
+            <h3>Aesthetic Theme</h3>
+            <p>Elegant gradients, warm textures, and Pakistani-inspired festive colors create a memorable brand feel.</p>
+          </div>
+          <div class="feature-card">
+            <div class="icon-badge">📱</div>
+            <h3>Responsive Layout</h3>
+            <p>The website works smoothly on mobile, tablet, and desktop so your customers can browse anywhere.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="pill">Menu in PKR</div>
+            <h2>Traditional Pakistani favorites.</h2>
+          </div>
+          <p>
+            A sample restaurant menu for Addus Kitchen. You can later replace any items, prices, or descriptions with your own final menu.
+          </p>
+        </div>
+
+        <div class="menu-wrap">
+          <div class="menu-card">
+            <h3>Main Courses</h3>
+
+            <div class="menu-item">
+              <div>
+                <strong>Chicken Karahi</strong>
+                <span>Classic wok-cooked chicken with tomatoes, green chili, ginger, and desi masala.</span>
+              </div>
+              <div class="price">PKR 1,850</div>
+            </div>
+
+            <div class="menu-item">
+              <div>
+                <strong>Mutton Karahi</strong>
+                <span>Rich and tender mutton karahi with bold spice balance and smoky finish.</span>
+              </div>
+              <div class="price">PKR 2,950</div>
+            </div>
+
+            <div class="menu-item">
+              <div>
+                <strong>Chicken Handi</strong>
+                <span>Creamy tomato-based gravy cooked with butter, cream, and aromatic herbs.</span>
+              </div>
+              <div class="price">PKR 1,690</div>
+            </div>
+
+            <div class="menu-item">
+              <div>
+                <strong>Beef Nihari</strong>
+                <span>Slow-cooked traditional nihari served with ginger, lemon, and green chilies.</span>
+              </div>
+              <div class="price">PKR 1,240</div>
+            </div>
+          </div>
+
+          <div class="menu-card">
+            <h3>Rice, BBQ & Desserts</h3>
+
+            <div class="menu-item">
+              <div>
+                <strong>Special Chicken Biryani</strong>
+                <span>Fragrant basmati rice layered with spiced chicken, potato, and saffron notes.</span>
+              </div>
+              <div class="price">PKR 850</div>
+            </div>
+
+            <div class="menu-item">
+              <div>
+                <strong>Seekh Kebab Platter</strong>
+                <span>Juicy charcoal-grilled kebabs served with mint chutney and fresh naan.</span>
+              </div>
+              <div class="price">PKR 1,150</div>
+            </div>
+
+            <div class="menu-item">
+              <div>
+                <strong>Garlic Naan Basket</strong>
+                <span>Fresh tandoor naan, butter naan, and garlic naan served warm.</span>
+              </div>
+              <div class="price">PKR 420</div>
+            </div>
+
+            <div class="menu-item">
+              <div>
+                <strong>Gulab Jamun & Kheer Duo</strong>
+                <span>A sweet ending with classic Pakistani dessert favorites.</span>
+              </div>
+              <div class="price">PKR 540</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ambience">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="pill">Ambience</div>
+            <h2>Stylish, warm, and deeply desi.</h2>
+          </div>
+          <p>
+            This concept uses a premium Pakistani-inspired atmosphere that can reflect wall art, lantern lighting, handcrafted textures,
+            and a comfortable family-friendly environment.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <div class="gallery-card">
+            <div class="label">
+              <strong>Royal Dining Mood</strong>
+              <span>Warm golden glow, earthy palette, and elegant textures inspired by traditional hospitality.</span>
+            </div>
+          </div>
+          <div class="gallery-card">
+            <div class="label">
+              <strong>Truck Art Energy</strong>
+              <span>Festive accent colors and cultural character for a memorable restaurant identity.</span>
+            </div>
+          </div>
+          <div class="gallery-card">
+            <div class="label">
+              <strong>Family Table Feel</strong>
+              <span>Comfortable setup for gatherings, celebrations, and classic Pakistani food moments.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="pill">Guest Impressions</div>
+            <h2>Sample review section for your website.</h2>
+          </div>
+          <p>
+            These are placeholder testimonials to show how the review area will look. You can replace them with real customer feedback later.
+          </p>
+        </div>
+
+        <div class="testimonials">
+          <div class="review-card">
+            <h3>“Authentic and beautiful”</h3>
+            <p>The vibe feels premium and the food descriptions instantly make the restaurant look inviting and trustworthy.</p>
+            <strong>— Happy Guest</strong>
+          </div>
+          <div class="review-card">
+            <h3>“Perfect desi branding”</h3>
+            <p>The colors and layout match a modern Pakistani restaurant perfectly, especially for biryani and karahi lovers.</p>
+            <strong>— Food Lover</strong>
+          </div>
+          <div class="review-card">
+            <h3>“Great for mobile visitors”</h3>
+            <p>The website is clean, fast, and easy to browse, which is perfect for users checking menu and prices on phones.</p>
+            <strong>— New Customer</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="pill">Contact & Reservation</div>
+            <h2>Ready to welcome your guests.</h2>
+          </div>
+          <p>
+            Add your real restaurant details here later. For now, this section gives you a polished contact and reservation layout.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-card">
+            <h3>Restaurant Information</h3>
+            <p>
+              Replace the placeholder content below with your real address, WhatsApp number, opening hours, Google Maps location,
+              and social media pages.
+            </p>
+            <ul>
+              <li><strong>Address:</strong> Your restaurant address here</li>
+              <li><strong>Phone:</strong> +92 XXX XXX XXXX</li>
+              <li><strong>Hours:</strong> 1:00 PM – 12:00 AM</li>
+              <li><strong>Instagram:</strong> @adduskitchen</li>
+            </ul>
+          </div>
+
+          <div class="contact-card">
+            <h3>Book a Table</h3>
+            <form onsubmit="event.preventDefault(); alert('Reservation form demo only — connect it to WhatsApp, email, or backend later.');">
+              <div class="field-grid">
+                <input type="text" placeholder="Your name" required />
+                <input type="tel" placeholder="Phone number" required />
+              </div>
+              <div class="field-grid">
+                <input type="date" required />
+                <select required>
+                  <option value="">Guests</option>
+                  <option>2 Guests</option>
+                  <option>4 Guests</option>
+                  <option>6 Guests</option>
+                  <option>8+ Guests</option>
+                </select>
+              </div>
+              <textarea placeholder="Special request"></textarea>
+              <button class="cta" type="submit">Send Reservation Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-box">
+      <div>
+        <strong style="display:block; color:var(--gold-soft); margin-bottom:8px;">Addus Kitchen</strong>
+        <span>Traditional Pakistani cuisine with an aesthetic modern digital presence.</span>
+      </div>
+      <div>
+        <span>Designed as a single-page responsive restaurant website concept.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
